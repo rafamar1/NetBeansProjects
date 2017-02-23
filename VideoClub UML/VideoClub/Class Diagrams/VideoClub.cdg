@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="VideoClub">
+  <ClassDiagramComponents>
+    <Class name="DVD" package="" visibility="public" xPosition="56.0" yPosition="28.0">
+      <Fields>
+        <Field name="codigo" type="String" visibility="private"/>
+        <Field name="titulo" type="String" visibility="private"/>
+        <Field name="director" type="String" visibility="private"/>
+        <Field name="listaActores" type="ArrayList" visibility="private"/>
+        <Field name="listaDVDs" type="TreeMap" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="DVD" returnType="ArrayList" visibility="public">
+          <Argument type="String" name="titulo"/>
+          <Argument type="String" name="codigo"/>
+          <Argument type="String" name="director"/>
+          <Argument type="ArrayList" name="listaActores"/>
+        </Method>
+        <Method name="aniadirDVDaMap" returnType="TreeMap" visibility="public">
+          <Argument type="String" name="codigo"/>
+          <Argument type="TreeMap" name="listaDVDs"/>
+        </Method>
+        <Method name="getCodigo" returnType="String" visibility="public"/>
+        <Method name="getTitulo" returnType="String" visibility="public"/>
+        <Method name="getDirector" returnType="String" visibility="public"/>
+        <Method name="getlistaActores" returnType="ArrayList" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Cliente" package="" visibility="public" xPosition="934.0" yPosition="76.0">
+      <Fields>
+        <Field name="nombreCliente" type="String" visibility="private"/>
+        <Field name="peliculasAlquiladas" type="HashMap" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="Cliente" returnType="String" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="getPeliculasAlquiladas" returnType="ArrayList" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public"/>
+        <Method name="alquila" returnType="void" visibility="public">
+          <Argument type="DVD" name="p"/>
+        </Method>
+        <Method name="devuelve" returnType="DVD" visibility="public">
+          <Argument type="String" name="t"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="VideoclubException" package="" visibility="public" xPosition="864.0" yPosition="652.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="VideoclubException" returnType="String" visibility="public">
+          <Argument type="String" name="error"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="VideoClub" package="" visibility="public" xPosition="472.0" yPosition="500.0">
+      <Fields>
+        <Field name="listaClientes" type="HashMap" visibility="private"/>
+        <Field name="listaPeliculas" type="TreeSet" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="VideoClub" returnType="void" visibility="public">
+          <Argument type="File" name="clientes"/>
+          <Argument type="File" name="peliculas"/>
+        </Method>
+        <Method name="copias" returnType="Set" visibility="public">
+          <Argument type="String" name="titulo"/>
+        </Method>
+        <Method name="cliente" returnType="Cliente" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="alquila" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="titulo"/>
+        </Method>
+        <Method name="devuelve" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="titulo"/>
+        </Method>
+        <Method name="disponibles" returnType="String" visibility="public"/>
+        <Method name="alquiladas" returnType="String" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Copias" package="" visibility="public" xPosition="56.0" yPosition="569.0">
+      <Fields>
+        <Field name="numCopias" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Interface name="Comparable" package="" visibility="public" xPosition="654.0" yPosition="28.0">
+      <Methods>
+        <Method name="CompareTo" returnType="int" visibility="public"/>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="navegabilidad*" source="VideoClub" target="Copias" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="es de" source="Copias" target="DVD" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation name="dispara" source="VideoClub" target="VideoclubException" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="pertenece" source="VideoClub" target="Cliente" type="Composition" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="DVD" target="Comparable"/>
+    <HasRelation name="tiene" source="VideoClub" target="DVD" type="Composition" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
