@@ -1,0 +1,9 @@
+Creamos las dos carpetas, es y persona, con el java dentro
+en el ES.java ponemos como package utils67.es
+en el Persona.java ponemos como package utils67.persona y ademas import utils67.es.ES
+
+despues compilamos ambos archivos desde la carpeta externa ( como se muestra en la captura)
+por ultimo escribimos en la linea de comandos lo siguiente
+C:\codigojava>jar -cf pruebajar.jar utils67
+
+De esta manera se nos creara el archivo jar en nuestra carpeta
