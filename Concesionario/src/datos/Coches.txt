@@ -1,0 +1,6 @@
+Opel;Corsa;100;Gasoil;124AG45BB1;11111111H,23445-JBV,Climatizador, llantas acero, elevalunas
+Ford;focus;120;Gasoil;124AG45AA1;11111111H,6789-BBC,Cierre centralizado
+Seat;ibiza;90;Gasolina;456rrt22h1
+Renault;Clio;80;Gasolina;555rrt267h1
+Seat;Alhambra;100;Gasolina;456AAt2339
+Mercedes;benz;180;Gasoil;666AJ45ZZ6;22222222R,5555-RRR,control de valocidad,abs,fcc
