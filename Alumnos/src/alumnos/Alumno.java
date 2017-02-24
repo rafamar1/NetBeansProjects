@@ -58,7 +58,7 @@ public class Alumno extends Persona{
     /*MODIFICAMOS EL TOSTRING PARA QUE SE ADAPTE AL ESTILO PEDIDO*/
     @Override
     public String toString() {
-        return apellidos+", "+nombre+", " + nie+", "+pintaBeca()+", "+centroProcedencia;
+        return apellidos+", "+nombre+", " + nie+", "+pintaBeca()+", "+centroProcedencia+"\n";
     }
 
     private String pintaBeca() {

@@ -27,7 +27,7 @@ public class GestionAlumnos {
         do {
             menu();
 
-            opcion = ES.leeN("Introduzca una opcion: ");
+            opcion = ES.leeN("\nIntroduzca una opcion: ");
 
             switch (opcion) {
 
@@ -95,7 +95,7 @@ public class GestionAlumnos {
     }
 
     private static void listaNombreCiclos() {
-        System.out.println("\n***Lista de Ciclos***");
+        System.out.println("\n\t\t***Lista de Ciclos***");
         int i = 0;
         for (CicloFormativo ciclo : listaCiclos) {
             System.out.println("\t" + (i + 1) + "-" + ciclo.getNombreCiclo());
