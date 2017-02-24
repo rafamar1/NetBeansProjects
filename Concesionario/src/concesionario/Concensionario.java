@@ -106,7 +106,7 @@ public class Concensionario {
             listaClientes.add(cliente);
         }
         
-       private void cargaCochesDeFichero(String nombreFichero) throws FileNotFoundException, IOException{
+       /*private void cargaCochesDeFichero(String nombreFichero) throws FileNotFoundException, IOException{
            
            FileReader fileReader = new FileReader(nombreFichero);
            BufferedReader bufferedReader= new BufferedReader(fileReader);
@@ -123,7 +123,8 @@ public class Concensionario {
                 }
                     
                     }
-       }
+       }*/
         
     }
+}
 
