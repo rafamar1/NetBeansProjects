@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.TreeSet;
 import utilidades67.ES.ES;
 
 /**
@@ -52,7 +53,8 @@ public class VideoClubUML {
                     //Devuelve DVD
                     break;
                 case 8:
-                    miVideoClub.escribeSobreFichero("peliculas2.txt");
+                    //miVideoClub.escribeSobreFichero("peliculas2.txt");
+                    guardaPeliculasFichero(miVideoClub);
                     break;
 
                 case 9:
@@ -120,6 +122,35 @@ public class VideoClubUML {
         menuPrincipal.add("Salir");
 
         return menuPrincipal;
+    }
+
+    private static void guardaPeliculasFichero(VideoClub videoClub) throws IOException {
+        TreeSet listaPeliculas = videoClub.getListaPeliculas();
+                
+        FileWriter fileWriter = new FileWriter("src/datos/peliculas2.txt"); 
+        PrintWriter printWriter = new PrintWriter(fileWriter);   
+    
+        int numeroCopias=0;
+        for(Object pelicula:listaPeliculas){
+            DVD miPelicula =(DVD)pelicula;
+            numeroCopias=videoClub.getCopiasDisponibles().get(miPelicula.getTitulo()).size();
+            printWriter.print(numeroCopias);
+            printWriter.print(";");
+            printWriter.print(miPelicula.getCodigo());
+            printWriter.print(";");
+            printWriter.print(miPelicula.getTitulo());
+            printWriter.print(";");
+            printWriter.print(miPelicula.getDirector());
+            printWriter.print(";");
+            ArrayList actores = miPelicula.getListaActores();
+            for (Object actor : actores) {
+                printWriter.print(actor);
+                printWriter.print("#");
+            }
+            printWriter.println();    
+                
+        }
+        fileWriter.close();
     }
 
 
