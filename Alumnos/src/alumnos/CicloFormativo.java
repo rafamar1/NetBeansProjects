@@ -54,6 +54,12 @@ public class CicloFormativo {
         return listaModulos;
     }
 
+    
+    public String listadoCiclo() {
+        return "-Nombre del Ciclo: " + nombreCiclo + "\n-Duración"+ años
+                + "\n-Máximo de Alumnos"+maximoAlumnos+listarModulos();
+    }
+
     public void setListaModulos(ArrayList<String> listaModulos) {
         this.listaModulos = listaModulos;
     }
@@ -92,5 +98,15 @@ public class CicloFormativo {
             salida+=alumno.toString();
         }
        return salida; 
+    }
+
+    private String listarModulos() {
+        String salida="\tModulos que lo componen";
+        int contador=1;
+        for (String modulo : listaModulos) {
+            salida+="\n\t"+contador+"-."+modulo;
+            contador++;
+        }
+        return salida;
     }
 }
