@@ -54,10 +54,15 @@ public class GestionAlumnos {
         } while (opcion != 4);
     }
 
+                            /***--CREACION & ALTAS--***/
     private static void altaAlumno() throws CiclosError {
         CicloFormativo cicloFormativo = obtenerCiclo();
-        Alumno alumno = new Alumno(pideNombre(), pideApellidos(), pideNif(), pideNIE(), pideBeca(), pideCentro());
-        cicloFormativo.matriculaAlumno(alumno);
+        if(cicloFormativo.compruebaMaximo()){
+           Alumno alumno = new Alumno(pideNombre(), pideApellidos(), pideNif(), pideNIE(), pideBeca(), pideCentro());
+           cicloFormativo.matriculaAlumno(alumno); 
+        }else
+            System.out.println("El Ciclo Formativo tiene el maximo de alumnos");
+        
     }
 
     private static CicloFormativo obtenerCiclo() {
@@ -77,7 +82,62 @@ public class GestionAlumnos {
         } while (ciclo == null);
         return ciclo;
     }
+    
+        private static void creacionDeCiclo() {
+        int opcionCiclo;
+                    do {
+                        menuCiclo();
+                        opcionCiclo = ES.leeN("Introduzca una opcion: ");
+                        switch (opcionCiclo) {
+                            case 1:
+                                listaCiclos.add(new CicloFormativo(pideNombreCiclo(), pideNAños(), pideMaxAlumnos()));
+                                break;
 
+                            case 2:
+                                listaCiclos.add(new CicloFormativo(pideNombreCiclo(), pideNAños(), pideMaxAlumnos(), introduceModulos()));
+                                break;
+
+                            case 3:
+                                break;
+
+                            default:
+                                System.out.println("¡¡Opcion NO Válida!!");
+                                break;
+                        }
+
+                    } while (opcionCiclo != 3);
+
+    }
+
+    private static void listadoDeCiclo() {
+        int opcionListado;
+                    do {
+                        menuListado();
+                        opcionListado = ES.leeN("Introduzca una opcion: ");
+                        switch (opcionListado) {
+                            case 1:
+                                listarCiclo();
+                                break;
+
+                            case 2:
+                                CicloFormativo cicloFormativo = obtenerCiclo();
+                                System.out.println(cicloFormativo.listadoCiclo());
+                                break;
+
+                            case 3:
+                                break;
+
+                            default:
+                                System.out.println("¡¡Opcion NO Válida!!");
+                                break;
+                        }
+
+                    } while (opcionListado != 3);
+
+    }
+
+
+                                /***--MENUS--***/
     private static void menu() {
         System.out.println("\t\t/**-- GESTIÓN DE CICLOS & ALUMNOS --**\\");
         System.out.println("\n1.- Dar de Alta un Nuevo Ciclo");
@@ -100,7 +160,7 @@ public class GestionAlumnos {
         System.out.println("3.- Salir");
     }
 
-
+                            /*METODOS PARA LISTAR*/
     private static void listaNombreCiclos() {
         System.out.println("\n\t\t***Lista de Ciclos***");
         int i = 0;
@@ -123,9 +183,7 @@ public class GestionAlumnos {
 
     }
 
-    /**
-     * *--METODOS PARA PEDIR DATOS--**
-     */
+                        /***-METODOS PARA PEDIR DATOS--***/
     private static String pideNombreCiclo() {
         return ES.leeDeTeclado("Introduzca el Nombre del Ciclo: ");
     }
@@ -180,57 +238,5 @@ public class GestionAlumnos {
         return modulos;
     }
 
-    private static void creacionDeCiclo() {
-        int opcionCiclo;
-                    do {
-                        menuCiclo();
-                        opcionCiclo = ES.leeN("Introduzca una opcion: ");
-                        switch (opcionCiclo) {
-                            case 1:
-                                listaCiclos.add(new CicloFormativo(pideNombreCiclo(), pideNAños(), pideMaxAlumnos()));
-                                break;
-
-                            case 2:
-                                listaCiclos.add(new CicloFormativo(pideNombreCiclo(), pideNAños(), pideMaxAlumnos(), introduceModulos()));
-                                break;
-
-                            case 3:
-                                break;
-
-                            default:
-                                System.out.println("¡¡Opcion NO Válida!!");
-                                break;
-                        }
-
-                    } while (opcionCiclo != 3);
-
-    }
-
-    private static void listadoDeCiclo() {
-        int opcionListado;
-                    do {
-                        menuListado();
-                        opcionListado = ES.leeN("Introduzca una opcion: ");
-                        switch (opcionListado) {
-                            case 1:
-                                listarCiclo();
-                                break;
-
-                            case 2:
-                                CicloFormativo cicloFormativo = obtenerCiclo();
-                                System.out.println(cicloFormativo.listadoCiclo());
-                                break;
-
-                            case 3:
-                                break;
-
-                            default:
-                                System.out.println("¡¡Opcion NO Válida!!");
-                                break;
-                        }
-
-                    } while (opcionListado != 3);
-
-    }
 
 }
