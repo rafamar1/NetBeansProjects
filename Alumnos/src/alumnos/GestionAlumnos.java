@@ -152,9 +152,9 @@ public class GestionAlumnos {
     }
 
     private static boolean pideBeca() {
-        char beca = ES.leecaracter("Introduzca si el alumno dispone de beca(s/n): ");
+        String beca = ES.leeDeTeclado("Introduzca si el alumno dispone de beca(s/n): ");
 
-        return beca == 's';
+        return beca.equalsIgnoreCase("s");
     }
 
     private static String pideCentro() {
