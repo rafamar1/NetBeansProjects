@@ -34,7 +34,6 @@ public class CicloFormativo {
     public CicloFormativo(String nombreCiclo, int años, int maximoAlumnos, ArrayList<String> listaModulos) {
         this(nombreCiclo, años,maximoAlumnos);
         this.listaModulos = listaModulos;
-        listaAlumnos= new ArrayList();
     }
 
     public CicloFormativo(String nombreCiclo, ArrayList<String> listaModulos, int años, int maximoAlumnos, ArrayList<Alumno> listaAlumnos) {
