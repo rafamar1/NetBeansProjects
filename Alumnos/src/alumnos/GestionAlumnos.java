@@ -40,8 +40,7 @@ public class GestionAlumnos {
                     break;
 
                 case 3:
-                    listarCiclo();
-
+                    listadoDeCiclo();
                     break;
 
                 case 4:
@@ -72,7 +71,7 @@ public class GestionAlumnos {
             try {
                 ciclo = (CicloFormativo) listaCiclos.get(numeroCiclo - 1);
             } catch (IndexOutOfBoundsException error) {
-                System.out.println("¡Empresa no válida!");
+                System.out.println("¡Numero de Ciclo no Válido!");
             }
 
         } while (ciclo == null);
@@ -83,7 +82,7 @@ public class GestionAlumnos {
         System.out.println("\t\t/**-- GESTIÓN DE CICLOS --**\\");
         System.out.println("\n1.- Dar de Alta un Nuevo Ciclo");
         System.out.println("2.- Matricular un Alumno");
-        System.out.println("3.- Listar estado del Ciclo");
+        System.out.println("3.- Listar Ciclo");
         System.out.println("4.- Salir");
     }
 
@@ -93,6 +92,14 @@ public class GestionAlumnos {
         System.out.println("2.- Ciclo nuevo, introduciendo los Módulos que lo componen ");
         System.out.println("3.- Salir");
     }
+    
+    private static void menuListado() {
+        System.out.println("\t\t/**-- Seleccione una opción--**\\");
+        System.out.println("\n1.- Listado de los Alumnos del Ciclo");
+        System.out.println("2.- Listado de las Características del ciclo ");
+        System.out.println("3.- Salir");
+    }
+
 
     private static void listaNombreCiclos() {
         System.out.println("\n\t\t***Lista de Ciclos***");
@@ -196,6 +203,35 @@ public class GestionAlumnos {
                         }
 
                     } while (opcionCiclo != 3);
+
+    }
+
+    private static void listadoDeCiclo() {
+        int opcionListado;
+                    do {
+                        menuListado();
+                        opcionListado = ES.leeN("Introduzca una opcion: ");
+                        switch (opcionListado) {
+                            case 1:
+                                listarCiclo();
+                                break;
+
+                            case 2:
+                                /*FALTA ARREGLAR ESTE APARTADO
+                                ¿PORQUE LO HACE IGUAL QUE EN EL APARTADO 1?
+                                CicloFormativo cicloFormativo = obtenerCiclo();
+                                cicloFormativo.listadoCiclo();*/
+                                break;
+
+                            case 3:
+                                break;
+
+                            default:
+                                System.out.println("¡¡Opcion NO Válida!!");
+                                break;
+                        }
+
+                    } while (opcionListado != 3);
 
     }
 
