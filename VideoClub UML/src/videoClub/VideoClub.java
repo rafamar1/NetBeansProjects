@@ -1,23 +1,14 @@
 package videoClub;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class VideoClub {
 
-    private HashMap listaClientes;
+    private HashMap<String, Cliente> listaClientes;
 
-    private TreeSet listaPeliculas;
+    private TreeSet<DVD> listaPeliculas;
 
     private HashMap<String, ArrayList<Copia>> copiasDisponibles;
 
@@ -54,23 +45,45 @@ public class VideoClub {
     }
 
     public Cliente cliente(String nombre) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return listaClientes.get(nombre);
     }
 
-    public void alquila(String nombre, String titulo) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void alquilaPelicula(String nombre, String titulo) {
+        Copia copia = copiasDisponibles.get(titulo).get(0);
+        cliente(nombre).alquila(titulo, copia);
+        copiasDisponibles.get(titulo).remove(copia);
     }
 
     public void devuelve(String nombre, String titulo) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Copia copia = cliente(nombre).devuelve(titulo);
+        copiasDisponibles.get(titulo).add(copia);
     }
 
-    public String disponibles() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void copiasDisponibles() {
+        Set<String> conjuntoTitulosCopias = copiasDisponibles.keySet();
+        for (String tituloCopias : conjuntoTitulosCopias) {
+            System.out.println(tituloCopias);
+            ArrayList<Copia> listaCopias = copiasDisponibles.get(tituloCopias);
+            for (Copia copia : listaCopias) {
+                System.out.println(copia.toString());
+            }
+        }
     }
+    
+    /*METODO ALTERNATIVO
+    public void copiasDisponibles() {
+        Set<Entry<String, ArrayList<Copia>>> conjuntoListaCopias = copiasDisponibles.entrySet();
+        for (Entry<String, ArrayList<Copia>> listaCopias : conjuntoListaCopias) {
+            System.out.println(listaCopias.getKey() + ": ");
+            for (Copia copia : listaCopias.getValue()) {
+                System.out.println("\t" + copia);
+            }
+        }
+    }*/
 
-    public String alquiladas(String nombreCliente) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void copiasAlquiladas(String nombreCliente) {
+        String peliculasAlquiladas = cliente(nombreCliente).pintaPeliculasAlquiladas();
+        System.out.println(peliculasAlquiladas);
     }
 
     private void cargaClientesDeFichero(String nombreFichero) throws FileNotFoundException, IOException {
@@ -135,6 +148,35 @@ public class VideoClub {
         }
     }
 
+    public void escribeSobreFichero(String ficheroPelicula) throws IOException {
+
+        FileWriter fileWriter = new FileWriter(ficheroPelicula, false);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        Iterator iterador = listaPeliculas.iterator();
+        while (iterador.hasNext()) {
+            Map.Entry pelicula = (Map.Entry) iterador.next();
+            DVD peli = (DVD) pelicula.getValue();
+            int numeroCopias = copiasDisponibles.get(peli.getCodigo()).size();
+            printWriter.println();
+            printWriter.print(numeroCopias);
+            printWriter.print(";");
+            printWriter.print(peli.getCodigo());
+            printWriter.print(";");
+            printWriter.print(peli.getTitulo());
+            printWriter.print(";");
+            printWriter.print(peli.getDirector());
+            printWriter.print(";");
+            ArrayList actores = peli.getListaActores();
+            for (Object actor : actores) {
+                printWriter.print(actor);
+                printWriter.print("#");
+            }
+
+            fileWriter.close();
+        }
+
+    }
+
     private String pintaNombreClientes() {
         String cadena = "";
         Iterator iterador = listaClientes.entrySet().iterator();
@@ -144,35 +186,4 @@ public class VideoClub {
         }
         return cadena + "\n";
     }
-    
-    public void escribeSobreFichero(String ficheroPelicula) throws IOException{
-                 
-        FileWriter fileWriter = new FileWriter(ficheroPelicula, false); 
-        PrintWriter printWriter = new PrintWriter(fileWriter);        
-        Iterator iterador = listaPeliculas.iterator();
-        while (iterador.hasNext()) {
-                Map.Entry pelicula = (Map.Entry) iterador.next();
-                DVD peli = (DVD) pelicula.getValue();
-                int numeroCopias = copiasDisponibles.get(peli.getCodigo()).size();
-                printWriter.println();
-                printWriter.print(numeroCopias);
-                printWriter.print(";");
-                printWriter.print(peli.getCodigo());
-                printWriter.print(";");
-                printWriter.print(peli.getTitulo());
-                printWriter.print(";");
-                printWriter.print(peli.getDirector());
-                printWriter.print(";");
-                ArrayList actores = peli.getListaActores();
-                for (Object actor : actores) {
-                    printWriter.print(actor);
-                    printWriter.print("#");
-                }
-                
-            fileWriter.close();
-        }
-    
-    }
 }
-    
-

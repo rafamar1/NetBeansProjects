@@ -12,7 +12,7 @@ import utilidades67.ES.ES;
  *
  * @author RafaMar
  */
-public class VideoClubUML {
+public class ManejaVideoClub {
 
     public static void main(String[] args) throws IOException {
 
