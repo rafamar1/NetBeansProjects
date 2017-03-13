@@ -1,10 +1,10 @@
 package videoClub;
 
 
-import java.util.ArrayList;
-import java.util.Objects;
+import java.io.*;
+import java.util.*;
 
-public class DVD implements Comparable {
+public class DVD implements Comparable,Serializable {
 
     private String codigo;
 
@@ -12,7 +12,7 @@ public class DVD implements Comparable {
 
     private String director;
 
-    private ArrayList listaActores;
+    private ArrayList<String> listaActores;
 
    public DVD (String codigo, String titulo, String director, ArrayList listaActores){
        this.codigo=codigo;
@@ -75,4 +75,5 @@ public class DVD implements Comparable {
         DVD dvd = (DVD) objeto;
         return this.getTitulo().compareToIgnoreCase(dvd.getTitulo());
     }
+    
 }
