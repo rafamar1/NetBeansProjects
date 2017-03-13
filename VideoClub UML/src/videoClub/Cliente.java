@@ -1,21 +1,16 @@
 package videoClub;
 
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 
 public class Cliente {
 
     private String nombreCliente;
 
-    private HashMap <String, ArrayList<Copia>>  peliculasAlquiladas;
-    
-    private ArrayList<Copia> listaCopias;
-    
+    private HashMap<String, ArrayList<Copia>> peliculasAlquiladas;
+
     public Cliente(String nombre) {
-       this.nombreCliente = nombre;
-       peliculasAlquiladas = new HashMap();
+        this.nombreCliente = nombre;
+        peliculasAlquiladas = new HashMap();
     }
 
     public String getNombreCliente() {
@@ -24,6 +19,23 @@ public class Cliente {
 
     public HashMap<String, ArrayList<Copia>> getPeliculasAlquiladas() {
         return peliculasAlquiladas;
+    }
+
+    public String pintaPeliculasAlquiladas() {
+        String salida = "";
+
+        Set<String> setPeliculas = peliculasAlquiladas.keySet();
+        if (setPeliculas.isEmpty()) {
+            return "No tiene Peliculas Alquiladas";
+        } else {
+            for (String tituloPelicula : setPeliculas) {
+                int numeroCopias = peliculasAlquiladas.get(tituloPelicula).size();
+                salida += tituloPelicula + ": " + numeroCopias + " copias\n";
+
+            }
+            return salida;
+        }
+
     }
 
     @Override
@@ -50,20 +62,25 @@ public class Cliente {
         }
         return true;
     }
-    
-    
-    
-    /*public void alquila(DVD pelicula) {
+
+    public void alquila(String titulo, Copia copia) {
+        ArrayList<Copia> listaCopias = new ArrayList();
+        if (peliculasAlquiladas.containsKey(titulo)) {
+            listaCopias = peliculasAlquiladas.get(titulo);
+        }
         listaCopias.add(copia);
-        peliculasAlquiladas.put(pelicula.getCodigo(), listaCopias);
-    }*/
-    public void alquila(Copia copia) {
-        listaCopias.add(copia);
-        peliculasAlquiladas.put(copia.getCodigoPelicula(), listaCopias);
+        peliculasAlquiladas.put(titulo, listaCopias);
     }
-    
-    public DVD devuelve(String titulo) {
-        //peliculasAlquiladas.get(this).equals(titulo);
-        return null;
+
+    public Copia devuelve(String titulo) {
+        ArrayList<Copia> listaCopias = peliculasAlquiladas.get(titulo);
+        Copia copia = listaCopias.get(0);
+        listaCopias.remove(0);
+        if (listaCopias.isEmpty()) {
+            peliculasAlquiladas.remove(titulo);
+        } else {
+            peliculasAlquiladas.replace(titulo, listaCopias);
+        }
+        return copia;
     }
 }
