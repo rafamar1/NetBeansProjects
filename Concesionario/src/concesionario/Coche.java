@@ -15,7 +15,7 @@ public class Coche {
     
     private String modelo;
     
-    private int clinidrada;
+    private int cilindrada;
     
     private String tipoCombustible;
     
@@ -23,7 +23,7 @@ public class Coche {
     public Coche(String marca, String modelo, int clinidrada, String tipoCombustible) {
         this.marca = marca;
         this.modelo = modelo;
-        this.clinidrada = clinidrada;
+        this.cilindrada = clinidrada;
         this.tipoCombustible = tipoCombustible;
     }
 
@@ -43,12 +43,12 @@ public class Coche {
         this.modelo = modelo;
     }
 
-    public int getClinidrada() {
-        return clinidrada;
+    public int getCilindrada() {
+        return cilindrada;
     }
 
-    public void setClinidrada(int clinidrada) {
-        this.clinidrada = clinidrada;
+    public void setCilindrada(int cilindrada) {
+        this.cilindrada = cilindrada;
     }
 
     public String getTipoCombustible() {
@@ -57,6 +57,11 @@ public class Coche {
 
     public void setTipoCombustible(String tipoCombustible) {
         this.tipoCombustible = tipoCombustible;
+    }
+
+    @Override
+    public String toString() {
+        return "Coche{" + "marca=" + marca + ", modelo=" + modelo + ", clinidrada=" + cilindrada + ", tipoCombustible=" + tipoCombustible + '}';
     }
 
 

@@ -16,19 +16,20 @@ public class CocheMatriculado extends CocheStock {
     
     private String numMatricula;
     
-    private Date fechaMatricula;
+    private String fechaMatricula;
     
     private String nifCliente;
     
-    private ArrayList accesorios;
+    private ArrayList<String> listaAccesorios = new ArrayList<>();
 
-    public CocheMatriculado(String numMatricula, Date fechaMatricula, String nifCliente, ArrayList accesorios, String marca, String modelo, int clinidrada, String tipoCombustible) {
-        super(marca, modelo, clinidrada, tipoCombustible);
+    public CocheMatriculado(String marca,String modelo, int cilindrada, String tipoCombustible, String numBastidor,String numMatricula, String fechaMatricula, String nifCliente, ArrayList accesorios) {
+        super(marca, modelo, cilindrada, tipoCombustible,numBastidor);
         this.numMatricula = numMatricula;
         this.fechaMatricula = fechaMatricula;
         this.nifCliente = nifCliente;
-        this.accesorios = accesorios;
+        this.listaAccesorios = accesorios;
     }
+    
     
     
 }

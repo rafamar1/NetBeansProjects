@@ -13,12 +13,23 @@ public class CocheStock extends Coche {
     
     private String numBastidor;
 
-    public CocheStock(String marca, String modelo, int clinidrada, String tipoCombustible) {
-        super(marca, modelo, clinidrada, tipoCombustible);
+    public CocheStock(String marca, String modelo, int cilindrada, String tipoCombustible,String numBastidor) {
+        super(marca, modelo, cilindrada, tipoCombustible);
+        this.numBastidor=numBastidor;
+    }
+
+    public String getNumBastidor() {
+        return numBastidor;
     }
 
     public void setNumBastidor(String numBastidor) {
         this.numBastidor = numBastidor;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+"CocheStock{" + "numBastidor=" + numBastidor + '}';
+    }
+    
     
 }

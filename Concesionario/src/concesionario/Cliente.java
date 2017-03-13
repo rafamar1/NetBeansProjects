@@ -18,11 +18,10 @@ public class Cliente extends Persona{
     
     private String sexo;
 
-
-    public Cliente(String nombre,String apellidos, String nif, int edad,int telefono,String sexo) {
-        super(nombre, nif , apellidos , edad, telefono);
-        this.sexo=sexo;
+    public Cliente(String nombre,String apellidos, String nif) {
+        super(nombre,  apellidos , nif);
     }
+    
     public Cliente(String nombre, String apellidos,String nif, int edad,int telefono, String sexo,ArrayList<String> matriculasCochesComprados) {
        super(nombre, nif , apellidos , edad, telefono);
        this.matriculasCochesComprados=matriculasCochesComprados;

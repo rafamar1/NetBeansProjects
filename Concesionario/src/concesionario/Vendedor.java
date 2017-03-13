@@ -5,12 +5,19 @@
  */
 package concesionario;
 
+import utilidades67.personas.Persona;
+
 /**
  *
  * @author RafaMar
  */
-public class Vendedor {
+public class Vendedor extends Persona{
     
     private double totalVentas;
+    
+    public Vendedor(String nombre, String nif) {
+        super(nombre, nif);
+        totalVentas=0;
+    }
     
 }
