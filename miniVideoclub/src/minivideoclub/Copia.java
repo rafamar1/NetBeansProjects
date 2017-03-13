@@ -12,6 +12,22 @@ public class Copia implements Serializable {
         this.dvd = dvd;
     }
 
+    public int getNumCopia() {
+        return numCopia;
+    }
+
+    public void setNumCopia(int numCopia) {
+        this.numCopia = numCopia;
+    }
+
+    public String getDvd() {
+        return dvd;
+    }
+
+    public void setDvd(String dvd) {
+        this.dvd = dvd;
+    }
+
     @Override
     public String toString() {
         return "\n\t\t{" + "numCopia=" + numCopia + "}";

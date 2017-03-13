@@ -19,7 +19,7 @@ public class MiniVideoclub {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
      
         VideoClub miVideoClub= new VideoClub();
         
@@ -32,6 +32,7 @@ public class MiniVideoclub {
             else
                 
            miVideoClub.cargaPeliculasDeFicheroScanner(miVideoClub,"src/datos/peliculas.txt");  
+           miVideoClub.generaInformeCopias();
            
         guardaDatosVideoClub(miVideoClub,"src/datos/datosVideoclub");
             

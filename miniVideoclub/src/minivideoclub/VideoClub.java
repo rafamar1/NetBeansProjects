@@ -1,29 +1,13 @@
 package minivideoclub;
 
-import java.io.BufferedReader;
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.*;
+import java.util.*;
 
 public class VideoClub implements Serializable {
 
-    private HashMap listaClientes;
+    private HashMap<String,Cliente> listaClientes;
 
-    private TreeSet listaPeliculas;
+    private TreeSet<DVD> listaPeliculas;
 
     public HashMap<String, ArrayList<Copia>> peliculasDisponibles;
 
@@ -217,13 +201,11 @@ public class VideoClub implements Serializable {
         } catch (FileNotFoundException ex) {
             System.out.println("Fichero -> " + nombrefichero + " no se encuentra");
         } catch (IOException ex) {
-            Logger.getLogger(VideoClub.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+          } finally {
             try {
                 br.close();
             } catch (IOException ex) {
-                Logger.getLogger(VideoClub.class.getName()).log(Level.SEVERE, null, ex);
-            }
+             }
         }
     }//cargaPeliculasDeFichero
     //--------------------------------------------------
@@ -303,7 +285,7 @@ public class VideoClub implements Serializable {
                 Copia copia;
 
                 ArrayList listaCopias = new ArrayList();
-                for (int i = 1; i < numCopias; i++) {
+                for (int i = 0; i < numCopias; i++) {
                     copia = new Copia(i, pelicula.getCodigo());
                     listaCopias.add(copia);
                 }
@@ -313,6 +295,33 @@ public class VideoClub implements Serializable {
         } catch (FileNotFoundException ex) {
             System.out.println("Fichero -> " + nombrefichero + " no se encuentra");
         }
+    }
+    
+    public void generaInformeCopias() throws IOException{
+        
+        FileWriter informe = new FileWriter ("src/datos/informeCopias.txt");
+                
+        PrintWriter printWriter = new PrintWriter(new BufferedWriter(informe));
+        
+        printWriter.println("Informe de Peliculas Alquiladas");
+        for (DVD pelicula : listaPeliculas) {
+            printWriter.println("\n/*******----"+pelicula.getTitulo()+"----*******\\\n");
+            printWriter.println("\tCopias Disponibles --> "+
+                                peliculasDisponibles.get(pelicula.getTitulo()).size());
+            /*Hacemos un set para obtener las claves del HashMap de listaClientes
+            y poder obtener asi los objetos Cliente*/
+            Set<String> nombresClientes = listaClientes.keySet();
+            for (String nombre : nombresClientes) {
+                if(listaClientes.get(nombre).getPeliculasAlquiladas().containsKey(pelicula.getTitulo()))
+                    printWriter.println(listaClientes.get(nombre).getNombre()+listaClientes.get(nombre).getPeliculasAlquiladas().get(pelicula.getTitulo()).size());
+            }
+            /*Si en lugar de obtener la cantidad de copias de cada pelicula que tiene cada cliente, quisieramos obtener el numero propio de copia que tiene el cliente
+            tendriamos que recorrer el arrayList y obtener el numero de Copia*/
+            
+        }
+        printWriter.println();
+        printWriter.close();
+        
     }
     
 }

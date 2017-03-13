@@ -1,0 +1,26 @@
+Informe de Peliculas Alquiladas
+
+/*******----28 días después----*******\
+
+	Copias Disponibles --> 5
+
+/*******----American pie ¡Menuda boda!----*******\
+
+	Copias Disponibles --> 7
+
+/*******----Canguro Jack trinca y brinca----*******\
+
+	Copias Disponibles --> 8
+
+/*******----Como Dios----*******\
+
+	Copias Disponibles --> 9
+
+/*******----Enemigos. Ecks contra Sever----*******\
+
+	Copias Disponibles --> 10
+
+/*******----Lara Croft: Tomb raider. La cuna de la vida----*******\
+
+	Copias Disponibles --> 6
+
