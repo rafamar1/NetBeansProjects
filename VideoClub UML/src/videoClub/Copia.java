@@ -1,6 +1,8 @@
 package videoClub;
 
-public class Copia {
+import java.io.Serializable;
+
+public class Copia implements Serializable {
 
     private int numeroCopia;
     
@@ -18,7 +20,8 @@ public class Copia {
     public String getCodigoPelicula() {
         return codigo;
     }
-
+    
+    
     @Override
     public String toString() {
         return "Numero de Copia=" + numeroCopia + "Codigo de Pelicula=" + codigo;
