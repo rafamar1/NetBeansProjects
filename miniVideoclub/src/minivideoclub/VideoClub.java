@@ -19,7 +19,7 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class VideoClub implements Serializable{
+public class VideoClub implements Serializable {
 
     private HashMap listaClientes;
 
@@ -120,17 +120,17 @@ public class VideoClub implements Serializable{
 
     //-------------------------------------------------
     public void cargaClientesDeFicheroScanner(String nombrefichero) {
-        
+
         File miFile = new File(nombrefichero);
-               
+
         try {
             Scanner sc = new Scanner(miFile);
-            
+
             String linea;
-            
+
             Cliente cli;
             while (sc.hasNextLine()) {
-                linea= sc.next();
+                linea = sc.next();
                 cli = new Cliente(linea);
                 listaClientes.put(cli.getNombre(), cli);
             }
@@ -147,8 +147,8 @@ public class VideoClub implements Serializable{
     public VideoClub leeDatosvideoclub(String fichero) {
         FileInputStream fis = null;
         ObjectInputStream ois = null;
-        VideoClub miVideo=null;
-        
+        VideoClub miVideo = null;
+
         try {
             fis = new FileInputStream(fichero);
             ois = new ObjectInputStream(fis);
@@ -156,7 +156,7 @@ public class VideoClub implements Serializable{
             /*  listaClientes=(HashMap)ois.readObject();            
                 listaPeliculas=(TreeSet)ois.readObject();
                 peliculasDisponibles=(HashMap)ois.readObject();  */
-             miVideo = (VideoClub) ois.readObject();
+            miVideo = (VideoClub) ois.readObject();
 
             ois.close();
             return miVideo;
@@ -227,6 +227,7 @@ public class VideoClub implements Serializable{
         }
     }//cargaPeliculasDeFichero
     //--------------------------------------------------
+
     public void guardaDatosVideoclub(String fichero) {
 
         FileOutputStream fos = null;
@@ -257,67 +258,61 @@ public class VideoClub implements Serializable{
         }
         //  return 0;
     }
+
     public void cargaPeliculasDeFicheroScanner(VideoClub miVideoClub, String nombrefichero) throws FileNotFoundException {
-        
+
         File miFile = new File(nombrefichero);
-        Scanner sc,scPeli = null;
-        
+        Scanner sc, scannerPeli, scannerActor = null;
+
         TreeSet listaPeliculas = miVideoClub.getListaPeliculas();
         HashMap peliculasDisponibles = miVideoClub.getPeliculasDisponibles();
         try {
             sc = new Scanner(miFile);
-            
-            String linea;
-            
-            DVD peli;
+
+            DVD pelicula;
             while (sc.hasNextLine()) {
-                String datosP = sc.nextLine();
                 
-                scPeli=new Scanner(datosP);
-                scPeli.useDelimiter("*");
-                
-                /*while(scPeli.hasNext()){
-                                }*/
-                
-                
-                String[] arrayActores = datosP[3].split(",");
+                /*Estaba dando error en esta linea porque el metodo sc.next() solo cogia hasta el siguiente espacio*/
+                String datosPelicula = sc.nextLine();
 
-                /*  List actores=new ArrayList();
-                    actores=Arrays.asList(arrayActores);*/
-                ArrayList actores = new ArrayList();
+                
+                scannerPeli = new Scanner(datosPelicula);
+                scannerPeli.useDelimiter("\\*");
 
-                for (Object actor : arrayActores) {
-                    actores.add(actor);
+                
+                String codigo = scannerPeli.next();
+                String titulo = scannerPeli.next();
+                String director = scannerPeli.next();
+                String actores = scannerPeli.next();
+                int numCopias = scannerPeli.nextInt();
+
+                //AQUI PODRIAMOS REASIGNAR EL SCANNERPELICULAS
+                scannerActor = new Scanner(actores);
+                scannerActor.useDelimiter(",");
+                ArrayList listaActores = new ArrayList();
+
+                while (scannerActor.hasNext()) {
+                    String actor = scannerActor.next();
+                    listaActores.add(actor);
                 }
 
-                peli = new DVD(datosP[0],
-                        datosP[1],
-                        datosP[2],
-                        actores);
+                pelicula = new DVD(codigo, titulo, director, listaActores);
 
-                listaPeliculas.add(peli);
-                //-----Generar las copias de laa peli 
-                int numCopias = Integer.parseInt(datosP[4]);
-                Copia cp;
+                listaPeliculas.add(pelicula);
+                //-----Generar las copias de las peli 
+                Copia copia;
 
-                ArrayList copias = new ArrayList();
+                ArrayList listaCopias = new ArrayList();
                 for (int i = 1; i < numCopias; i++) {
-                    cp = new Copia(i, peli.getCodigo());
-                    copias.add(cp);
+                    copia = new Copia(i, pelicula.getCodigo());
+                    listaCopias.add(copia);
                 }
-                peliculasDisponibles.put(peli.getTitulo(), copias);
+                peliculasDisponibles.put(pelicula.getTitulo(), listaCopias);
             }
 
         } catch (FileNotFoundException ex) {
             System.out.println("Fichero -> " + nombrefichero + " no se encuentra");
-        } catch (IOException ex) {
-            Logger.getLogger(VideoClub.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                br.close();
-            } catch (IOException ex) {
-                Logger.getLogger(VideoClub.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
-    }//cargaPeliculasDeFichero
+    }
+    
 }

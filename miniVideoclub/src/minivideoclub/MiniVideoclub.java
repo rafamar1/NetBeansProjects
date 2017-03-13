@@ -6,6 +6,9 @@
 package minivideoclub;
 
 import java.io.File;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,7 +19,7 @@ public class MiniVideoclub {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
      
         VideoClub miVideoClub= new VideoClub();
         
@@ -27,15 +30,27 @@ public class MiniVideoclub {
         miVideoClub=miVideoClub.leeDatosvideoclub
                             ("src/datos/datosVideoclub.dat");
             else
-           miVideoClub.cargaPeliculasDeFichero(miVideoClub,"src/datos/peliculas.txt");  
-                                   
-        
-        System.out.println("Estado del videoclub...");
-        System.out.println(miVideoClub);
-        
-        miVideoClub.guardaDatosVideoclub("src/datos/datosVideoclub.dat");
+                
+           miVideoClub.cargaPeliculasDeFicheroScanner(miVideoClub,"src/datos/peliculas.txt");  
+           
+        guardaDatosVideoClub(miVideoClub,"src/datos/datosVideoclub");
+            
+            //System.out.println("Estado del videoclub...");
+            //System.out.println(miVideoClub);
+
         
 
+    }
+
+    private static void guardaDatosVideoClub(VideoClub videoclub, String rutaFichero) {
+        
+        try {
+            try (ObjectOutputStream objectOutput = new ObjectOutputStream(new FileOutputStream(rutaFichero))) {
+                 objectOutput.writeObject(videoclub);
+            }
+        } catch (IOException ex) {
+            System.out.println("Error de E/S");
+        }
     }
     
 }
