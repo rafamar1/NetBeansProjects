@@ -10,9 +10,30 @@ package hundirlaflota;
  * @author RafaMar
  */
 class Turno {
-
-    Turno(int JUGADOR1) {
     
+    private int turno;
+
+    Turno(int turnoInicial) {
+        this.turno = turnoInicial;
+    }
+
+    int esTurnoDe() {
+        return turno;
+    }
+
+    int noEsTurnoDe() {
+        int noEsTurnoDe;
+        if(esTurnoDe()==0){
+            noEsTurnoDe = 1;
+        }
+        else{
+            noEsTurnoDe = 0;
+        }
+        return noEsTurnoDe;
+    }
+
+    void cambiaTurno() {
+        turno = esTurnoDe() == 0 ? 1:0;
     }
     
 }

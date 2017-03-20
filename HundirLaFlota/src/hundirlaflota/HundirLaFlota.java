@@ -26,10 +26,38 @@ public class HundirLaFlota {
         Turno turno = new Turno(JUGADOR1);
         
         for (Jugador jugador : jugadores) {
-            
+            jugador = new Jugador();
+            jugador.inicializarTablero();
+            jugador.posicionaBarcos();
+        }
+        
+        boolean fin = false;
+        
+        while(!fin){
+            jugadores[turno.esTurnoDe()].mostrarTablero();
+            Coordenada coordenadaActual = jugadores[turno.esTurnoDe()].elegirCoordenada();
+            if(jugadores[turno.noEsTurnoDe()].compruebaCoordenada(coordenadaActual)==Tipo.Agua){
+                jugadores[turno.noEsTurnoDe()].mostrarCoordenada(coordenadaActual);
+                turno.cambiaTurno();
+            }else {
+                jugadores[turno.noEsTurnoDe()].mostrarCoordenada(coordenadaActual);
+                boolean barcoHundido = jugadores[turno.noEsTurnoDe()].compruebaBarco(coordenadaActual);
+                
+                if(barcoHundido){
+                    jugadores[turno.noEsTurnoDe()].decrementarNumeroBarcosDisponibles();
+                    jugadores[turno.noEsTurnoDe()].hundirBarco(coordenadaActual);
+                }
+                if(jugadores[turno.noEsTurnoDe()].getNumeroBarcosDisponibles()==0){
+                    fin = true;
+                }
+            }
+        }
+        
+        for (Jugador jugador : jugadores) {
+            jugador.mostrarTablero();
         }
         
         
     }
-    
+   
 }
