@@ -41,23 +41,7 @@ class Jugador {
     }
 
     Coordenada elegirCoordenada() {
-        int x = ES.leeN("Introduzca la posicion x [Entre 1 y "+DIMENSION_TABLERO+"]", 1, DIMENSION_TABLERO);
-        int y = ES.leeN("Introduzca la posicion y [Entre 1 y "+DIMENSION_TABLERO+"]", 1, DIMENSION_TABLERO);
-        Coordenada coordenada = new Coordenada (x,y);
-        //tablero.ENCONTRARBARCO
-        return coordenada;
-    }
-
-    Tipo compruebaCoordenada(Coordenada posicionActual) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void mostrarCoordenada(Coordenada coordenadaActual) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    boolean compruebaBarco(Coordenada coordenadaActual) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return tablero.elegirCoordenada();
     }
 
     public int getNumeroBarcosDisponibles() {
@@ -72,16 +56,8 @@ class Jugador {
        setNumeroBarcosDisponibles(getNumeroBarcosDisponibles() - 1);
     }
 
-    void hundirBarco(Coordenada coordenadaActual) {
-        //Cambiar TIPO a BarcoHundido
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    void mostrarTablero() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Tablero getTablero() {
+   public Tablero getTablero() {
         return tablero;
     }
 

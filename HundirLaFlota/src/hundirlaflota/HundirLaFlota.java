@@ -34,18 +34,18 @@ public class HundirLaFlota {
         boolean fin = false;
         
         while(!fin){
-            jugadores[turno.esTurnoDe()].mostrarTablero();
+            jugadores[turno.esTurnoDe()].getTablero().mostrarTablero();
             Coordenada coordenadaActual = jugadores[turno.esTurnoDe()].elegirCoordenada();
-            if(jugadores[turno.noEsTurnoDe()].compruebaCoordenada(coordenadaActual)==Tipo.Agua){
-                jugadores[turno.noEsTurnoDe()].mostrarCoordenada(coordenadaActual);
+            if(jugadores[turno.noEsTurnoDe()].getTablero().compruebaCoordenada(coordenadaActual)==Tipo.Agua){
+                jugadores[turno.noEsTurnoDe()].getTablero().mostrarCoordenada(coordenadaActual);
                 turno.cambiaTurno();
             }else {
-                jugadores[turno.noEsTurnoDe()].mostrarCoordenada(coordenadaActual);
-                boolean barcoHundido = jugadores[turno.noEsTurnoDe()].compruebaBarco(coordenadaActual);
+                jugadores[turno.noEsTurnoDe()].getTablero().mostrarCoordenada(coordenadaActual);
+                boolean barcoHundido = jugadores[turno.noEsTurnoDe()].getTablero().compruebaBarcoHundido(coordenadaActual);
                 
                 if(barcoHundido){
                     jugadores[turno.noEsTurnoDe()].decrementarNumeroBarcosDisponibles();
-                    jugadores[turno.noEsTurnoDe()].hundirBarco(coordenadaActual);
+                    jugadores[turno.noEsTurnoDe()].getTablero().hundirBarco(coordenadaActual);
                 }
                 if(jugadores[turno.noEsTurnoDe()].getNumeroBarcosDisponibles()==0){
                     fin = true;
@@ -54,10 +54,11 @@ public class HundirLaFlota {
         }
         
         for (Jugador jugador : jugadores) {
-            jugador.mostrarTablero();
+            jugador.getTablero().mostrarTablero();
         }
         
         
     }
+
    
 }
