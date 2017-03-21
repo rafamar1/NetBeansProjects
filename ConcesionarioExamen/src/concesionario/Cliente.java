@@ -96,8 +96,5 @@ public class Cliente extends Persona{
         }
     return salida;
     }
-    
-    
- 
-    
+
 }

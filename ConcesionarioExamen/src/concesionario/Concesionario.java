@@ -8,7 +8,6 @@ package concesionario;
 import java.io.*;
 import java.util.*;
 import utilidades67.ES.ES;
-import utilidades67.personas.Persona;
 
 /**
  *
@@ -103,10 +102,6 @@ public class Concesionario {
         return ES.leeDeTeclado("Introduzca la Matricula del Coche: ");
     }
 
-    public String pideFechaMatriculacion() {
-        return ES.leeDeTeclado("Introduzca la Fecha de Matriculacion (Formato dd/mm/yyyy): ");
-    }
-
     public int pideNumeroKilometros() {
         return ES.leeN("Introduzca el Nº de Kilometros del Coche: ");
     }
@@ -146,10 +141,21 @@ public class Concesionario {
     public void matricularNuevoVehiculo() {
         String nombreCliente = pideCliente();
         String numeroBastidor = pideCoche();
-        String fechaMatriculacion = pideFechaMatriculacion();
+        String fechaMatriculacion = obtenerFechaActual();
 
         Matriculacion matriculacion = new Matriculacion(compruebaMatricula(pideMatricula()), numeroBastidor, listaClientes.get(nombreCliente).getNif(), fechaMatriculacion);
         listaClientes.get(nombreCliente).getListaMatriculaciones().add(matriculacion);
+    }
+
+    private String obtenerFechaActual() {
+        
+        Calendar fecha = new GregorianCalendar();
+        
+        String año = Integer.toString(fecha.get(Calendar.YEAR));
+        String mes = Integer.toString(fecha.get(Calendar.MONTH));
+        String dia = Integer.toString(fecha.get(Calendar.DAY_OF_MONTH));
+        
+        return año+"/"+mes+"/"+dia;
     }
 
     private void listarClientes() {
