@@ -1,0 +1,3 @@
+opel,blanco,0,B12345678Z1
+seat,verde,0,N6666666M5
+toyoya,gris,100,Z9999999L9
