@@ -25,8 +25,8 @@ public class ConexionBaseDatos {
         
         if(conexion.compruebaConexion()){
             System.out.println("Base de Datos Conectada");
+            conexion.seleccionar();
         }
-            
         
     }
     

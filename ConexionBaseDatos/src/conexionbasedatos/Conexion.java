@@ -34,11 +34,11 @@ public class Conexion {
                 DriverManager.registerDriver(driver);
 
                 conexionBD = DriverManager.getConnection(this.urlORACLE, this.user, this.pass);
-
+                
             } catch (Exception ex) {
 
                 JOptionPane.showMessageDialog(null, ex);
-
+                
             }
 
             return conexionBD;
@@ -60,6 +60,21 @@ public class Conexion {
                 } catch (SQLException ex) {
                     System.out.println("Error cerrando Base de Datos");
                 }
+            }
+        }
+        
+        public void seleccionar() {
+            
+            try {
+                Statement statement = conexionBD.createStatement();
+                
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM EMPLE");
+                
+                while(resultSet.next()){
+                    System.out.println(resultSet.getInt("DEPT_NO")+" - "+resultSet.getString("APELLIDO"));
+                }
+            } catch (SQLException ex) {
+             
             }
         }
 
